@@ -12,6 +12,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem "hashid-rails", "~> 1.0"
 
+gem 'jwt'
+
 # Use sqlite3 as the database for Active Record
 # gem "sqlite3", "~> 1.4"
 # Use postgresql database
