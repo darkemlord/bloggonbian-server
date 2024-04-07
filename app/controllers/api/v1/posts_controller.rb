@@ -8,9 +8,13 @@ module Api
       end
 
       def create
-        @post = Post.new(post_params.merge(user_id: current_user.hashid))
+        @post = Post.new(post_params)
+        @user = User.find_by_hashid(params[:user_id])
+        @genre = Genre.find_by_hashid(params[:genre_id])
+        @post.user = @user
+        @post.genre = @genre
         if @post.save
-          render json: @post, status: :created
+          render :create, status: :created
         else
           render json: @post.errors, status: :unprocessable_entity
         end
