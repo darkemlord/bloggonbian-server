@@ -7,6 +7,15 @@ module Api
         @posts = Post.all()
       end
 
+      def create
+        @post = Post.new(post_params.merge(user_id: current_user.hashid))
+        if @post.save
+          render json: @post, status: :created
+        else
+          render json: @post.errors, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def post_params
