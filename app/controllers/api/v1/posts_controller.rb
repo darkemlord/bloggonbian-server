@@ -7,6 +7,10 @@ module Api
         @posts = Post.all()
       end
 
+      def show
+        @post = Post.find_by_hashid(params[:id])
+      end
+
       def create
         @post = Post.new(post_params)
         @user = User.find_by_hashid(params[:user_id])
