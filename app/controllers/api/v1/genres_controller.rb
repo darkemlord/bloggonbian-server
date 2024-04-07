@@ -7,6 +7,11 @@ module Api
         @genres = Genre.all()
       end
 
+      def show
+        @genre = Genre.find_by_hashid(params[:id])
+      end
+
+
       def create
         @genre = Genre.new(post_params)
         if @genre.save
