@@ -1,6 +1,8 @@
 module Api
   class ApiController < ApplicationController
     before_action :authenticate_request
+    helper_method :current_user
+    attr_reader :current_user
 
     private
 
