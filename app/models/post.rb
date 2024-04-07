@@ -4,7 +4,6 @@
 #
 #  id         :bigint           not null, primary key
 #  body       :text
-#  string     :string
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -24,4 +23,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   belongs_to :genre
+
+  # Validations
+  validates :title, presence: true
 end

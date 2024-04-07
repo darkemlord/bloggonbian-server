@@ -23,7 +23,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_030124) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
-    t.string "string"
     t.text "body"
     t.bigint "user_id", null: false
     t.bigint "genre_id", null: false
