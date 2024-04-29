@@ -12,14 +12,14 @@ put "Starting seeding ...."
   User.create!(
     name: "user #{i + 1}",
     email: "user#{i + 1}@ejemplo.com",
-    password: "password123",
+    password: 'password123',
   )
 end
 
 genres = [
-  { name: "Ciencia Ficción", description: "Exploración de conceptos futurísticos, ciencia y tecnología." },
-  { name: "Fantasía", description: "Elementos mágicos y sobrenaturales como parte central de la trama, el tema o el escenario." },
-  { name: "No Ficción", description: "Escritos basados en hechos, eventos reales y personas reales, como biografías o historias." }
+  { name: 'Ciencia Ficción', description: 'Exploración de conceptos futurísticos, ciencia y tecnología.' },
+  { name: 'Fantasía', description: 'Elementos mágicos y sobrenaturales como parte central de la trama, el tema o el escenario.' },
+  { name: 'No Ficción', description: 'Escritos basados en hechos, eventos reales y personas reales, como biografías o historias.' }
 ]
 
 genres.each do |genre|
@@ -40,4 +40,4 @@ end
   post.save!
 end
 
-put "Successfully seeded"
+put 'Successfully seeded'
