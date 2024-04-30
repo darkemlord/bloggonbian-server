@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-put 'Starting seeding ....'
+puts 'Starting seeding ....'
 
 10.times do |i|
   User.create!(
@@ -47,4 +47,4 @@ end
   post.save!
 end
 
-put 'Successfully seeded'
+puts 'Successfully seeded'
