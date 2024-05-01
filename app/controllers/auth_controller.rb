@@ -10,7 +10,7 @@ class AuthController < ApplicationController
   def login
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
-      token = encode_token({ user_id: user.id })
+      token = encode_token({ user_id: user.hashid })
       render json: user_json(user, token), status: :ok
     else
       render json: { error: 'Invalid username or password' }, status: :unauthorized
@@ -32,7 +32,7 @@ class AuthController < ApplicationController
   def encode_token(payload)
     exp = 24.hours.from_now.to_i
     payload[:exp] = exp
-    JWT.encode(payload, 'your_secret', 'HS256')
+    JWT.encode(payload, ENV['SECRET_KEY'], 'HS256')
   end
 
   def user_json(user, token)
