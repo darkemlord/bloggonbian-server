@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Authentication class
 class AuthController < ApplicationController
   # POST /register
   def register
@@ -9,7 +12,7 @@ class AuthController < ApplicationController
   # POST /login
   def login
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    if user&.authenticate(params[:password])
       token = encode_token({ user_id: user.hashid })
       render json: user_json(user, token), status: :ok
     else
