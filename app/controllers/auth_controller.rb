@@ -39,6 +39,6 @@ class AuthController < ApplicationController
   end
 
   def user_json(user, token)
-    {user: user.hashid, email: user.email, token: token}
+    { user: user.hashid, email: user.email, token: token }
   end
 end
