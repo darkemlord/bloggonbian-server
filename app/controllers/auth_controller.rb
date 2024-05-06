@@ -4,9 +4,13 @@
 class AuthController < ApplicationController
   # POST /register
   def register
-    user = User.create!(user_params)
+    user = User.create(user_params)
     token = encode_token({ user_id: user.hashid, email: user.email })
-    render json: user_json(user, token), status: :created
+    if user.valid?
+      render json: user_json(user, token), status: :created
+    else
+      render json: { error: user.errors }, status: :unprocessable_entity
+    end
   rescue ActiveRecord::RecordInvalid => e
     render json: { error: e.record.errors.full_messages.join(', ') }, status: :unprocessable_entity
   end
