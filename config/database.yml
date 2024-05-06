@@ -26,3 +26,5 @@ test:
 production:
   <<: *default
   database: bloggonbian_production
+  username: emanuel
+  password: <%= ENV["DB_KEY"] %>
