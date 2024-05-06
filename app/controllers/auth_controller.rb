@@ -7,6 +7,8 @@ class AuthController < ApplicationController
     user = User.create!(user_params)
     token = encode_token({ user_id: user.hashid, email: user.email })
     render json: user_json(user, token), status: :created
+  rescue ActiveRecord::RecordInvalid => e
+    render json: { error: e.record.errors.full_messages.join(', ') }, status: :unprocessable_entity
   end
 
   # POST /login
