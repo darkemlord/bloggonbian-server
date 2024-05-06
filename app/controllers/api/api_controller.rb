@@ -15,16 +15,15 @@ module Api
       begin
         @decoded = decode_token(header)
         @current_user = User.find(@decoded[:user_id])
-      rescue
+      rescue JWT::DecodeError => e
+        Rails.logger.error("Error decoding or authorizing request: #{e.message}")
         render json: { error: 'Unauthorized' }, status: :unauthorized
       end
     end
 
     def decode_token(token)
-      body = JWT.decode(token, 'your_secret', true, { algorithm: 'HS256' })[0]
+      body = JWT.decode(token, ENV['SECRET_KEY'], true, { algorithm: 'HS256' })[0]
       HashWithIndifferentAccess.new body
-    rescue
-      nil
     end
   end
 end

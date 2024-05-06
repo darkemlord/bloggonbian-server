@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   post '/register', to: 'auth#register'
   post '/login', to: 'auth#login'
   post '/logout', to: 'auth#logout'
+  get '/me', to: 'current_user#show'
 end
