@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Api
+  # api controller
   class ApiController < ApplicationController
     before_action :authenticate_request
     helper_method :current_user

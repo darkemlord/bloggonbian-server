@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # Genres controller
     class GenresController < Api::ApiController
       before_action :authenticate_request, only: [:create, :destroy, :update]
 
       def index
-        @genres = Genre.all()
+        @genres = Genre.all
       end
 
       def show
         @genre = Genre.find_by_hashid(params[:id])
       end
-
 
       def create
         @genre = Genre.new(post_params)

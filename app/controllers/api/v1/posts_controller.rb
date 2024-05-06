@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module Api
   module V1
+    # Posts controller
     class PostsController < Api::ApiController
-      before_action :authenticate_request, only: [:create, :destroy, :update]
+      before_action :authenticate_request, only: %i[create destroy update]
 
       def index
-        @posts = Post.all()
+        @posts = Post.all
       end
 
       def show
