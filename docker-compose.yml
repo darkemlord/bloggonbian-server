@@ -21,3 +21,25 @@ services:
       - "3000:3000"
     depends_on:
       - db
+
+  bloggonbian-swagger-editor:
+    image: swaggerapi/swagger-editor
+    container_name: bloggonbian-swagger-editor
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./document/reference/unified.yaml:/app.yaml
+    environment:
+      SWAGGER_FILE: /app.yaml
+    init: true
+
+  bloggonbian-swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: bloggonbian-swagger-ui
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./document/reference/unified.yaml:/app.yaml
+    environment:
+      SWAGGER_JSON: /app.yaml
+    init: true
