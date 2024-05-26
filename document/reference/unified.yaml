@@ -20,8 +20,110 @@ servers:
           - v1
 
 paths:
+  /login:
+    post:
+      tags:
+        - auth/users
+      summary: Login to the application
+      description: Login to the application sending email and password
+      servers:
+        - url: "http://localhost:3000"
+          variables:
+            api_version:
+              default: v1
+              enum:
+                - v1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: User logged in successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  token:
+                    type: string
+        "400":
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /register:
+    post:
+      tags:
+        - auth/users
+      summary: Register a new user
+      description: Register a new user sending name, email and password
+      servers:
+        - url: "http://localhost:3000"
+          variables:
+            api_version:
+              default: v1
+              enum:
+                - v1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+      responses:
+        "201":
+          description: User registered successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  token:
+                    type: string
+        "400":
+          description: Invalid input.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /users:
     get:
+      tags:
+        - users
       summary: Retrieve all users
       description: Retrieve all users information
       responses:
@@ -53,6 +155,41 @@ paths:
                       format: date-time
         "404":
           description: Users not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /posts:
+    get:
+      tags:
+        - posts
+      summary: Retrieve all posts
+      description: Retrieve all posts information
+      responses:
+        "200":
+          description: Posts information retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    title:
+                      type: string
+                    body:
+                      type: string
+                    author:
+                      type: string
+                    user_id:
+                      type: string
+        "404":
+          description: Posts not found.
           content:
             application/json:
               schema:
