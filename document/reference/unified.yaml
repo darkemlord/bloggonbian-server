@@ -3,38 +3,56 @@ info:
   title: Bloggonbian Api
   description: Bloggonbian documentation
   version: 1.0.0
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+security:
+  - ApiKeyAuth: []
+servers:
+  - url: "http://localhost:3000/api/{api_version}"
+    variables:
+      api_version:
+        default: v1
+        enum:
+          - v1
 
 paths:
-  /users/{userId}:
+  /users:
     get:
-      summary: Retrieve user information by ID
-      description: Retrieve user information by providing a unique user ID.
-      parameters:
-        - name: userId
-          in: path
-          description: The unique identifier of the user.
-          required: true
-          schema:
-            type: integer
-            format: int64
+      summary: Retrieve all users
+      description: Retrieve all users information
       responses:
         "200":
-          description: User information retrieved successfully.
+          description: Users information retrieved successfully.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                  name:
-                    type: string
-                  email:
-                    type: string
-                    format: email
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string
+                    email:
+                      type: string
+                      format: email
+                    role:
+                      type: string
+                      enum: [admin, user]
+                    created_at:
+                      type: string
+                      format: date-time
+                    updated_at:
+                      type: string
+                      format: date-time
         "404":
-          description: User not found.
+          description: Users not found.
           content:
             application/json:
               schema:
